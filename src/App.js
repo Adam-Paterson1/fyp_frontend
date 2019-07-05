@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Socket from './Socket'
+
 
 function App() {
+  const [ip, setIP] = useState('')
+  function go () {
+    Socket.boot(ip)
+  }
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <input value={ip} onChange={(e) => setIP(e.target.value)} />
+        <button onClick={go}>GO!</button>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
