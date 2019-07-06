@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Socket from './Socket'
-
+import Canvas from './Canvas'
 
 function App() {
   const [ip, setIP] = useState('')
@@ -15,6 +15,9 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <input value={ip} onChange={(e) => setIP(e.target.value)} />
         <button onClick={go}>GO!</button>
+        <button onClick={Socket.stop}>STOP!</button>
+
+        <Canvas />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
