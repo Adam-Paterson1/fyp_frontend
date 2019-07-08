@@ -29,6 +29,10 @@ Socket.boot = function (ip) {
   socket.onmessage = (event) => {
     console.log('Message from server ', event);
     const dat = JSON.parse(event.data);
+    if (dat.source == 'pos') {
+      dat.data.x = parseFloat(dat.data.x)
+      dat.data.y = parseFloat(dat.data.y)
+    }
     listening[dat.source].forEach((cb) => {
       cb(dat.data);
     })
@@ -51,7 +55,7 @@ Socket.sub = function (source, dest, cb) {
   }
   listening[source].set(dest, cb)
 }
-Socket.unsub = function (source, dest, cb) {
+Socket.unsub = function (source, dest) {
   if (listening[source]) { // Map exists
     listening[source].delete(dest) // Delete
     if (listening[source].size < 1) { // And potentially unsub

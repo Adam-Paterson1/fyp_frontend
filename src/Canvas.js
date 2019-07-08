@@ -14,21 +14,21 @@ function Canvas() {
     ctx.clearRect(0, 0, WIDTH, HEIGHT)
     ctx.fillRect(WIDTH / 2, 0, 1, HEIGHT)
     ctx.fillRect(0, HEIGHT / 2, WIDTH, 1)
+    // ctx.fillRect(0, pose.x, WIDTH, 1)
     ctx.fillRect(pose.x - drawOffset , pose.y - drawOffset, charSize, charSize);
   }, [canvasRef, pose])
   useEffect(() => {
-    // function setPo () {
-    //   setPose((pose) => {
-    //     return { x: pose.x + (-5 + Math.random() * 10),
-    //             y: pose.y + (-5 + Math.random() * 10)
-    //           }
-    //         })
-    // }
-    Socket.sub('pos', 'Canvas', setPose)
+    function setPo (inc) {
+      const tot = inc.x + inc.y
+      setPose({ x: 200,
+                y: 200 + (inc.y - inc.x) / tot * HEIGHT
+              })
+    }
+    Socket.sub('pos', 'Canvas', setPo)
     // const interval = setInterval(randState, 20);
     // return () => clearInterval(interval)
     return function cleanup() {
-      Socket.unsub('pos', 'Canvas', setPose)
+      Socket.unsub('pos', 'Canvas')
     }
   
   }, [])
