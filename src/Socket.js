@@ -1,3 +1,5 @@
+import Types from './Types';
+
 //Shape
 // listening: {
 //   'pose': MAP {
@@ -29,12 +31,9 @@ Socket.boot = function (ip) {
   socket.onmessage = (event) => {
     console.log('Message from server ', event);
     const dat = JSON.parse(event.data);
-    if (dat.source == 'pos') {
-      dat.data.x = parseFloat(dat.data.x)
-      dat.data.y = parseFloat(dat.data.y)
-    }
-    listening[dat.source].forEach((cb) => {
-      cb(dat.data);
+    const formattedData = Types.toType(dat)
+    listening[dat.type].forEach((cb) => {
+      cb(formattedData);
     })
   }
   socket.onclose = (event) => {

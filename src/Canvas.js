@@ -6,7 +6,7 @@ const WIDTH = 400;
 const charSize = 10;
 const drawOffset = (charSize - 1) / 2
 function Canvas() {
-  const [pose, setPose] = useState({x: WIDTH / 2, y: HEIGHT / 2})
+  const [pose, setPose] = useState({fx: WIDTH / 2, fy: HEIGHT / 2, bx: WIDTH / 2, by: HEIGHT / 2})
   const canvasRef = useRef(null)
   useEffect(() => {
     const canvas = canvasRef.current
@@ -15,20 +15,26 @@ function Canvas() {
     ctx.fillRect(WIDTH / 2, 0, 1, HEIGHT)
     ctx.fillRect(0, HEIGHT / 2, WIDTH, 1)
     // ctx.fillRect(0, pose.x, WIDTH, 1)
-    ctx.fillRect(pose.x - drawOffset , pose.y - drawOffset, charSize, charSize);
+    ctx.fillRect(pose.fx - drawOffset , pose.fy - drawOffset, charSize, charSize);
+    ctx.fillRect(pose.bx - drawOffset , pose.by - drawOffset, charSize, charSize);
   }, [canvasRef, pose])
   useEffect(() => {
-    function setPo (inc) {
-      const tot = inc.x + inc.y
-      setPose({ x: 200,
-                y: 200 + (inc.y - inc.x) / tot * HEIGHT
+    function setVLX (inc) {
+      const totY = 1000
+      const totX = 1000
+      const f = inc.front
+      const b = inc.back
+      setPose({ fx: 200 + (f.left - f.right) / totX * WIDTH,
+                fy: 200 + (f.top - f.bot) / totY * HEIGHT,
+                bx: 200 + (b.left - b.right) / totX * WIDTH,
+                by: 200 + (b.top - b.bot) / totY * HEIGHT,
               })
     }
-    Socket.sub('pos', 'Canvas', setPo)
+    Socket.sub('vlx', 'Canvas', setVLX)
     // const interval = setInterval(randState, 20);
     // return () => clearInterval(interval)
     return function cleanup() {
-      Socket.unsub('pos', 'Canvas')
+      Socket.unsub('vlx', 'Canvas')
     }
   
   }, [])
