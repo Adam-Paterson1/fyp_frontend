@@ -1,15 +1,17 @@
 import Types from './Types';
-
+// Subscriptions 
+// vlx - raw vlx sensor data
+// pos - position estimate from backend
+// imu - Rotations from pixhawk estimation
 //Shape
 // listening: {
-//   'pose': MAP {
+//   'pos': MAP {
 //     'Canvas': setState
 //     'Logger': setState
 //     'Printer': setState
 //   },
-//   'diagnostics',
-//   'errors',
-//   'logs'
+//   'vlx',
+//   'imu',
 // }
 let socket = null
 let listening = {}
