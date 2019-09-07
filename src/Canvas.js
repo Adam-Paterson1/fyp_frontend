@@ -39,9 +39,8 @@ function Canvas() {
     // const interval = setInterval(randState, 20);
     // return () => clearInterval(interval)
     return function cleanup() {
-      Socket.unsub('vlx', 'Canvas')
+      Socket.unsub('pos', 'Canvas')
     }
-  
   }, [])
   
   return (

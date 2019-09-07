@@ -31,7 +31,7 @@ Socket.boot = function (ip) {
   };
   // Listen for messages
   socket.onmessage = (event) => {
-    console.log('Message from server ', event);
+    // console.log('Message from server ', event);
     const dat = JSON.parse(event.data);
     const formattedData = Types.toType(dat)
     listening[dat.type].forEach((cb) => {

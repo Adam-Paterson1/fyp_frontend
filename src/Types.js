@@ -1,6 +1,7 @@
 const Types = {}
 class VLX {
   constructor (data) {
+    this.raw = [].concat(data)
     this.front = this.parseCube(data)
     this.back = this.parseCube(data.slice(4))
   }
