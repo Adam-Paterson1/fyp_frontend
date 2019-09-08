@@ -25,6 +25,12 @@ Types.toType = function (dat) {
       return new VLX(dat.data);
     case 'pos':
       return dat.data;
+    case 'pid':
+      return dat.data;
+    case 'target':
+      return dat.data;
+    case 'attitude':
+      return dat.data;
     default:
       console.log('Unknown Type')
       return dat.data
