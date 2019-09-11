@@ -6,7 +6,7 @@ const WIDTH = 400;
 const charSize = 10;
 const drawOffset = (charSize - 1) / 2
 function Canvas() {
-  const [pose, setPose] = useState({fy: WIDTH / 2, fz: HEIGHT / 2, by: WIDTH / 2, bz: HEIGHT / 2})
+  const [pose, setPose] = useState({fy: WIDTH / 2, fz: HEIGHT / 2, by: WIDTH / 2, bz: HEIGHT / 2, y: 0, z: 0})
   const canvasRef = useRef(null)
   useEffect(() => {
     const canvas = canvasRef.current
@@ -30,7 +30,9 @@ function Canvas() {
       //           bz: 200 + (b.top - b.bot) / totY * HEIGHT,
       //         })
       setPose({ fy: WIDTH / 2 + inc.y / totX * WIDTH,
-        fz: HEIGHT / 2 + (-inc.z) / totY * HEIGHT
+        fz: HEIGHT / 2 + (-inc.z) / totY * HEIGHT,
+        y: inc.y,
+        z: inc.z
         // by: 200 + (b.left - b.right) / totX * WIDTH,
         // bz: 200 + (b.top - b.bot) / totY * HEIGHT,
       })
@@ -52,6 +54,8 @@ function Canvas() {
         height="400"
         // style={{border:"1px solid #000000"}}
        />
+       <div>{pose.y}</div>
+       <div>{pose.z}</div>
     </div>
   );
 }

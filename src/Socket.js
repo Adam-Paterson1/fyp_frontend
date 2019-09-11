@@ -20,7 +20,7 @@ const Socket = {}
 Socket.boot = function (ip) {
   ip = ip || 'localhost'
   console.log(`connnecting to ${ip}`)
-  socket = new WebSocket(`wss://${ip}:8080`);
+  socket = new WebSocket(`ws://${ip}:8080`);
   socket.onopen = (event) => {
     console.log('Connected', event);
     const keys = Object.keys(listening)
