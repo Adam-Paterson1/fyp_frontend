@@ -24,6 +24,7 @@ function Dists(props) {
   }
   return (
     <div className="Dists">
+      <div>Raw Measurements</div>
       {Cube(dists.front, 'Front', quality)}
       {Cube(dists.back, 'Back', quality)}
     </div>
@@ -33,7 +34,7 @@ function getColour(prop1, prop2) {
   const diff = (Math.abs(prop1 - prop2) / 50) || 0 
   const r = diff * 255
   const g = (1 - diff) * 255
-  return 'rgb(' + r + ',' + g + ',0)'
+  return 'rgb(' + r + ',' + g + ',77)'
 }
 
 function Cube (dataSet, displayName, quality) {

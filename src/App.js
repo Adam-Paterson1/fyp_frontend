@@ -5,6 +5,8 @@ import Canvas from './Canvas'
 import Dists from './Dists';
 import Params from './Params';
 import Attitude from './Attitude';
+// import Graphs from './ErrorGraphs';
+import ChartWrapper from './ChartWrapper';
 
 const defaultPid = {
   py: 1,
@@ -19,7 +21,9 @@ const defaultTarget = {
   z: 0
 }
 function App() {
-  const [ip, setIP] = useState('192.168.137.176')
+  const [ip, setIP] = useState('192.168.43.191')
+  // const [ip, setIP] = useState('192.168.137.176')
+
   function go (event) {
     if (event) {
       event.preventDefault()
@@ -37,14 +41,16 @@ function App() {
               IP <input id="ip" value={ip} onChange={(e) => setIP(e.target.value)} />
             </label>
           </form>
-          <button id="start" onClick={go}>GO!</button>
-          <button id="stop" onClick={Socket.stop}>STOP!</button>
+          <button className="start" onClick={go}>GO!</button>
+          <button className="stop" onClick={Socket.stop}>STOP!</button>
         </div>
       </header>
       <main className="body">
         <Dists />
         <Canvas />
         <Attitude />
+        {/* <Graphs /> */}
+        <ChartWrapper />
       </main>
     </div>
   );
