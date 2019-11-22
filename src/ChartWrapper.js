@@ -15,13 +15,13 @@ const pos = {
   z: 0
 }
 function setPos (newData) {
-  pos.y = newData.y / 10000
-  pos.z = newData.z / 10000
+  pos.y = newData.y * 5
+  pos.z = newData.z / 5000
 }
 function updateCharts(newData) {
   const err = newData.err
-  err.ykf = newData.y / 10000
-  err.zkf = newData.z / 5000 + 0.04
+  err.ykf = newData.y * 5
+  err.zkf = newData.z / 5000
   err.y = pos.y
   err.z = pos.z
   let newState = {}

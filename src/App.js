@@ -14,14 +14,17 @@ const defaultPid = {
   dy: 0,
   pz: 1,
   iz: 0,
-  dz: 0
+  dz: 0,
+  pyaw: 0,
+  dyaw: 0
 }
 const defaultTarget = {
   y: 0,
   z: 0
 }
 function App() {
-  const [ip, setIP] = useState('192.168.43.191')
+  // const [ip, setIP] = useState('192.168.43.191')
+  const [ip, setIP] = useState('192.168.137.233')
   // const [ip, setIP] = useState('192.168.137.176')
 
   function go (event) {

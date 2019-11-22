@@ -134,6 +134,7 @@ function Canvas() {
       path.removeSegments()
       ourPath = [];
       path.strokeColor = 'black';
+      path.add({x: paper.view.center.x, y: paper.view.center.y})
       path.add(event.point);
     }
     tool.onMouseDrag = function(event) {
@@ -145,6 +146,7 @@ function Canvas() {
     }
     tool.onMouseUp = function (event) {  
       // When the mouse is released, simplify it:
+      path.add({x: paper.view.center.x, y: paper.view.center.y})
       path.simplify(0.4)
       path.flatten(2)
       if (path.segments.length > 1) {
@@ -209,16 +211,16 @@ function Canvas() {
     <div className="canvasBlock">
       <div>Position</div>
       <button className="start" onClick={handleStart}>Start</button>
-        <button className="stop" onClick={handleStop}>Stop</button>
+      <button className="stop" onClick={handleStop}>Stop</button>
       <div className="canvasBlock">
-      <div className="position">
-        <div>Y: {pose[pose.length-1].y}</div>
-        <div>Z: {pose[pose.length-1].z}</div>
-      </div>
-      <div className="position">
-        <div>Width: {totY}</div>
-        <div>Height: {totZ}</div>
-      </div>
+        <div className="position">
+          <div>Y: {pose[pose.length-1].y}</div>
+          <div>Z: {pose[pose.length-1].z}</div>
+        </div>
+        <div className="position">
+          <div>Width: {totY}</div>
+          <div>Height: {totZ}</div>
+        </div>
       </div>
       <canvas
         id="crossHairs"
